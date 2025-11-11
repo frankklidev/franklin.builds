@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Alfa+Slab+One&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rammetto+One&display=swap');
+
+@import 'tailwindcss';
+
+@theme {
+  --font-righteous: 'Righteous', sans-serif;
+  --font-alfa: 'Alfa Slab One', serif;
+  --font-rammetto: 'Rammetto One', sans-serif;
+  --font-montserrat: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-montserrat);
+}
+
+html,
+body {
+  font-family: var(--font-body);
+  color: #111;
+  background-color: #fff;
+}

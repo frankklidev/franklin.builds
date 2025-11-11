@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "luxdrive",
+    "name": "LuxDrive",
+    "summary": "Sistema completo para renta de autos: sitio público, panel de administración y branding coherente.",
+    "image": "/assets/projects/luxdrive.jpg",
+    "tags": ["React", "Panel Admin", "Branding"],
+    "url": "#"
+  },
+  {
+    "slug": "vivero",
+    "name": "Vivero",
+    "summary": "E-commerce ligero con contacto por WhatsApp para venta de plantas y servicios de jardinería.",
+    "image": "/assets/projects/vivero.jpg",
+    "tags": ["E-commerce", "WhatsApp", "Branding"],
+    "url": "#"
+  },
+  {
+    "slug": "roomflow",
+    "name": "RoomFlow",
+    "summary": "Aplicación para gestión de habitaciones y reservas en hostales, pensada para flujos simples.",
+    "image": "/assets/projects/roomflow.jpg",
+    "tags": ["SaaS", "Reservas"],
+    "url": "#"
+  }
+]
