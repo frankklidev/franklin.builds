@@ -4,7 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
-import { MdBolt, MdSpeed, MdVerified } from "react-icons/md";
+import { MdVerified } from "react-icons/md";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -72,10 +72,10 @@ export default function CTA() {
         bg-white
       "
     >
-      {/* Fondo premium: gradiente + halo suave */}
+
       <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-white via-neutral-50 to-white" />
-        <div className="absolute left-1/2 top-6 -translate-x-1/2 h-[28rem] w-[28rem] md:h-[36rem] md:w-[36rem] rounded-full bg-[#4f39f6]/10 blur-3xl" />
+        <div className="absolute inset-0 bg-linear-to-b from-white via-neutral-50 to-white" />
+        <div className="absolute left-1/2 top-6 -translate-x-1/2 h-28rem w-28rem md:h-36rem md:w-36rem rounded-full bg-[#4f39f6]/10 blur-3xl" />
         <div className="absolute -left-20 bottom-0 h-64 w-64 rounded-full bg-[#25D366]/10 blur-3xl" />
       </div>
 
