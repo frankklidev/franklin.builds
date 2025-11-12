@@ -13,7 +13,6 @@ export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // ===== Estilos de link (subrayado animado) =====
   const linkBase =
     "relative text-sm md:text-[15px] text-neutral-800 hover:text-black transition-colors " +
     "after:content-[''] after:absolute after:left-0 after:-bottom-1 " +
@@ -22,12 +21,10 @@ export default function Navbar() {
     "hover:after:scale-x-100 hover:after:opacity-100";
   const activeClass = "text-black after:scale-x-100 after:opacity-100";
 
-  // ===== Sombra + barra de progreso =====
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
       setScrolled(y > 6);
-
       if (progressRef.current) {
         const doc = document.documentElement;
         const h = doc.scrollHeight - doc.clientHeight;
@@ -40,12 +37,10 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // ===== Bloquear body cuando el menú mobile está abierto =====
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
   }, [open]);
 
-  // ===== Scroll suave al cambiar hash =====
   useEffect(() => {
     if (!location.hash) return;
     const id = location.hash.replace("#", "");
@@ -60,7 +55,6 @@ export default function Navbar() {
     el.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [location.pathname, location.hash]);
 
-  // Helpers
   const isHashActive = (hash: string) =>
     location.pathname === "/" && location.hash === hash;
 
@@ -132,9 +126,9 @@ export default function Navbar() {
             Sobre mí
           </NavLink>
 
-          {/* WhatsApp como ruta interna */}
+          {/* CTA que lleva a la sección de proyectos (no abre nueva pestaña) */}
           <NavLink
-            to="/whatsapp"
+            to="/proyectos"
             className={({ isActive }) =>
               cn(
                 "rounded-xl border border-black px-4 py-2 text-sm font-medium transition-transform duration-150 " +
@@ -143,12 +137,9 @@ export default function Navbar() {
                 isActive && "bg-black text-white"
               )
             }
-            onClick={closeAnd(() => {
-              // podrías redirigir al enlace real:
-              window.open("https://wa.me/+5352929141", "_blank");
-            })}
+            onClick={closeAnd()}
           >
-            WhatsApp
+            Ver proyectos
           </NavLink>
         </div>
 
@@ -222,18 +213,17 @@ export default function Navbar() {
               Sobre mí
             </NavLink>
 
+            {/* CTA mobile → también navega a /proyectos dentro de la app */}
             <NavLink
-              to="/whatsapp"
+              to="/proyectos"
               className={cn(
                 "mt-2 rounded-xl border border-black px-4 py-2 text-sm font-medium transition-transform duration-150 " +
                   "hover:translate-y-px hover:scale-[0.99] hover:bg-black hover:text-white focus-visible:outline-none " +
                   "focus-visible:ring-2 focus-visible:ring-[#4f39f6]/50"
               )}
-              onClick={closeAnd(() => {
-                window.open("https://wa.me/+5352929141", "_blank");
-              })}
+              onClick={closeAnd()}
             >
-              WhatsApp
+              Ver proyectos
             </NavLink>
           </div>
         </div>
