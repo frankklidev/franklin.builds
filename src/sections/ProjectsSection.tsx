@@ -142,8 +142,8 @@ export default function ProjectsSection({
                 ) : (
                   <div className="project-parallax relative w-full h-full transition-transform duration-700 group-hover:scale-[1.03]">
                     {/* fondo con degradado sutil + patrón grid muy suave */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#f3f2ff] via-white to-[#e9e7ff]" />
-                    <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.04)_1px,transparent_1px)] bg-[length:100%_28px] opacity-[0.15]" />
+                    <div className="absolute inset-0 bg-linear-to-br from-[#f3f2ff] via-white to-[#e9e7ff]" />
+                    <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.04)_1px,transparent_1px)] bg-size-[100%_28px] opacity-[0.15]" />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <span className="px-3 py-1.5 rounded-lg border border-neutral-300/70 bg-white/70 backdrop-blur text-neutral-800 text-sm md:text-base font-medium">
                         {p.name}
