@@ -49,7 +49,7 @@ export default function Services() {
       className="relative w-full h-full flex items-center justify-center text-white overflow-hidden"
     >
       <img
-        src="/src/assets/images/que_hacemos.png"
+        src="/images/que_hacemos.png"
         alt="Fondo de servicios"
         className="absolute inset-0 w-full h-full object-cover"
       />

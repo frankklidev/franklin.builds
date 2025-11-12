@@ -20,7 +20,7 @@ const featuredProjects: Project[] = [
     name: "Fulltech23",
     summary:
       "Sitio web moderno para una agencia tecnológica. Diseño limpio, profesional y responsivo, enfocado en generar confianza y captar clientes.",
-    image: "/src/assets/images/logoFulltech.jpeg",
+    image: "/images/logoFulltech.jpeg",
     tags: ["Next.js", "UI/UX", "SEO", "Performance"],
     url: "https://www.fulltech23.com/",
   },

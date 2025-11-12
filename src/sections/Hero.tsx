@@ -117,7 +117,7 @@ const Hero = () => {
       {/* Imagen de fondo */}
       <img
         ref={bgRef}
-        src="/src/assets/images/fondo_hero.jpg"
+        src="/images/fondo_hero.jpg"
         alt="Fondo hero section"
         className="absolute inset-0 w-full h-full object-cover"
         loading="eager"
