@@ -30,7 +30,7 @@ const featuredProjects: Project[] = [
     summary:
       "Plataforma de renta de autos con dashboard admin, reservas online y un diseño premium.",
     // 👇 sin image → mostrará fallback con el nombre
-    // image: undefined,
+    image: "/images/luxDrive.png",
     tags: ["React", "Supabase", "Mantine", "Vite", "Performance"],
     url: "https://luxdrive.tuplataformaweb.com/",
   },
