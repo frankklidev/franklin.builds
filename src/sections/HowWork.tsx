@@ -1,80 +1,80 @@
-import { useEffect, useRef, type JSX } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
-  MdAssessment,
-  MdOutlineStarRate,
-  MdRocketLaunch,
+  // MdAssessment,
+  // MdOutlineStarRate,
+  // MdRocketLaunch,
   MdTrendingUp,
 } from "react-icons/md";
 import { FaWhatsapp, FaGoogle } from "react-icons/fa";
-import { SiReact } from "react-icons/si";
+// import { SiReact } from "react-icons/si";
 
 gsap.registerPlugin(ScrollTrigger);
 
-type ProcessStep = {
-  number: string;
-  title: string;
-  subtitle: string;
-  desc: string;
-  icon: JSX.Element;
-  points: string[];
-};
+// type ProcessStep = {
+//   number: string;
+//   title: string;
+//   subtitle: string;
+//   desc: string;
+//   icon: JSX.Element;
+//   points: string[];
+// };
 
-const processSteps: ProcessStep[] = [
-  {
-    number: "01",
-    title: "Diagnóstico del negocio",
-    subtitle: "Antes de diseñar, entendemos qué debe vender.",
-    desc: "Analizo tu negocio, tus clientes, tus servicios y cómo estás captando oportunidades actualmente.",
-    icon: <MdAssessment className="text-2xl" aria-hidden="true" />,
-    points: [
-      "Qué vendes y a quién le vendes",
-      "Qué dudas frenan al cliente",
-      "Qué canales usas actualmente",
-      "Qué oportunidad digital podemos aprovechar",
-    ],
-  },
-  {
-    number: "02",
-    title: "Estrategia comercial digital",
-    subtitle: "Definimos una solución con intención de negocio.",
-    desc: "No se trata de hacer una web por hacerla. Definimos qué herramienta necesita tu negocio para vender, captar o automatizar mejor.",
-    icon: <MdOutlineStarRate className="text-2xl" aria-hidden="true" />,
-    points: [
-      "Web corporativa o landing de venta",
-      "Catálogo conectado a WhatsApp",
-      "Sistema de reservas o pedidos",
-      "Presencia preparada para Google",
-    ],
-  },
-  {
-    number: "03",
-    title: "Diseño y desarrollo",
-    subtitle: "Construimos una experiencia clara, premium y funcional.",
-    desc: "Diseño y desarrollo una solución rápida, responsive y orientada a generar confianza desde el primer contacto.",
-    icon: <SiReact className="text-2xl" aria-hidden="true" />,
-    points: [
-      "Diseño visual profesional",
-      "Copy enfocado en conversión",
-      "Desarrollo responsive",
-      "Integración con WhatsApp y analítica",
-    ],
-  },
-  {
-    number: "04",
-    title: "Lanzamiento y mejora",
-    subtitle: "Publicamos, medimos y dejamos base para crecer.",
-    desc: "Revisamos que todo funcione correctamente y dejamos una estructura lista para seguir mejorando con datos reales.",
-    icon: <MdRocketLaunch className="text-2xl" aria-hidden="true" />,
-    points: [
-      "Checklist de publicación",
-      "Optimización de velocidad",
-      "SEO técnico inicial",
-      "Recomendaciones de mejora continua",
-    ],
-  },
-];
+// const processSteps: ProcessStep[] = [
+//   {
+//     number: "01",
+//     title: "Diagnóstico del negocio",
+//     subtitle: "Antes de diseñar, entendemos qué debe vender.",
+//     desc: "Analizo tu negocio, tus clientes, tus servicios y cómo estás captando oportunidades actualmente.",
+//     icon: <MdAssessment className="text-2xl" aria-hidden="true" />,
+//     points: [
+//       "Qué vendes y a quién le vendes",
+//       "Qué dudas frenan al cliente",
+//       "Qué canales usas actualmente",
+//       "Qué oportunidad digital podemos aprovechar",
+//     ],
+//   },
+//   {
+//     number: "02",
+//     title: "Estrategia comercial digital",
+//     subtitle: "Definimos una solución con intención de negocio.",
+//     desc: "No se trata de hacer una web por hacerla. Definimos qué herramienta necesita tu negocio para vender, captar o automatizar mejor.",
+//     icon: <MdOutlineStarRate className="text-2xl" aria-hidden="true" />,
+//     points: [
+//       "Web corporativa o landing de venta",
+//       "Catálogo conectado a WhatsApp",
+//       "Sistema de reservas o pedidos",
+//       "Presencia preparada para Google",
+//     ],
+//   },
+//   {
+//     number: "03",
+//     title: "Diseño y desarrollo",
+//     subtitle: "Construimos una experiencia clara, premium y funcional.",
+//     desc: "Diseño y desarrollo una solución rápida, responsive y orientada a generar confianza desde el primer contacto.",
+//     icon: <SiReact className="text-2xl" aria-hidden="true" />,
+//     points: [
+//       "Diseño visual profesional",
+//       "Copy enfocado en conversión",
+//       "Desarrollo responsive",
+//       "Integración con WhatsApp y analítica",
+//     ],
+//   },
+//   {
+//     number: "04",
+//     title: "Lanzamiento y mejora",
+//     subtitle: "Publicamos, medimos y dejamos base para crecer.",
+//     desc: "Revisamos que todo funcione correctamente y dejamos una estructura lista para seguir mejorando con datos reales.",
+//     icon: <MdRocketLaunch className="text-2xl" aria-hidden="true" />,
+//     points: [
+//       "Checklist de publicación",
+//       "Optimización de velocidad",
+//       "SEO técnico inicial",
+//       "Recomendaciones de mejora continua",
+//     ],
+//   },
+// ];
 
 const deliverables = [
   {
@@ -100,9 +100,9 @@ export default function ComoTrabajo() {
 
   cardsRef.current = [];
 
-  const setCardRef = (i: number) => (el: HTMLDivElement | null): void => {
-    if (el) cardsRef.current[i] = el;
-  };
+  // const setCardRef = (i: number) => (el: HTMLDivElement | null): void => {
+  //   if (el) cardsRef.current[i] = el;
+  // };
 
   useEffect(() => {
     const reduce = window.matchMedia?.(
