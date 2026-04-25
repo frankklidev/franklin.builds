@@ -1,43 +1,37 @@
-import Hero from '../sections/Hero';
-import Services from '../sections/Services';
-import About from '../sections/About';
-import CTA from '../sections/CTA';
-import { useDocumentTitle, useMeta, useOG } from '../lib/usePage';
-import ComoTrabajo from '../sections/HowWork';
-import Testimonios from '../sections/Testimonios';
-import Projects from './Projects';
+import SEO from "../components/SEO";
+
+import Hero from "../sections/Hero";
+import Services from "../sections/Services";
+import About from "../sections/About";
+import CTA from "../sections/CTA";
+import ComoTrabajo from "../sections/HowWork";
+import Testimonios from "../sections/Testimonios";
+import Projects from "./Projects";
 
 export default function Home() {
-  // SEO básico
-  useDocumentTitle('franklin.builds — Diseño, Web & Estrategia');
-  useMeta(
-    'description',
-    'Diseño minimalista, desarrollo web y estrategia para marcas que quieren crecer.'
-  );
-  useOG('og:title', 'franklin.builds — Diseño, Web & Estrategia');
-  useOG(
-    'og:description',
-    'Diseño minimalista, desarrollo web y estrategia para marcas que quieren crecer.'
-  );
-  useOG('og:image', '/cover.jpg');
-
   return (
-    <main className='flex flex-col min-h-screen bg-white text-black'>
-      {/* HERO (tu componente ya maneja altura/estilos) */}
-      <Hero />
+    <>
+      <SEO
+        title="franklin.builds | Webs y soluciones digitales para negocios"
+        description="Desarrollo webs, catálogos digitales y sistemas para negocios que quieren verse más profesionales, generar confianza y vender mejor."
+        url="https://franklinbuilds.tuplataformaweb.com/"
+        image="https://franklinbuilds.tuplataformaweb.com/images/logo-share.png"
+      />
 
-      {/* SERVICES: ocupa toda la pantalla, sin márgenes extras */}
-      <section className='relative h-screen overflow-hidden'>
-        <Services />
-      </section>
+      <main className="flex min-h-screen flex-col bg-[#070707] text-white">
+        <Hero />
 
-      {/* PROJECTS: full-bleed, sin wrapper con padding/bordes para no cortar el fondo */}
-      <Projects  />
+        <section className="relative min-h-screen overflow-hidden">
+          <Services />
+        </section>
 
-      <ComoTrabajo />
-      <Testimonios />
-      <About />
-      <CTA />
-    </main>
+        <Projects />
+
+        <ComoTrabajo />
+        <Testimonios />
+        <About />
+        <CTA />
+      </main>
+    </>
   );
 }
