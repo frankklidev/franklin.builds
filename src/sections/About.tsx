@@ -14,6 +14,7 @@ export default function About() {
   const textRef = useRef<HTMLParagraphElement | null>(null);
   const bulletsRef = useRef<HTMLDivElement | null>(null);
   const kpiRefs = useRef<HTMLDivElement[]>([]);
+
   kpiRefs.current = [];
 
   const setKpiRef = (i: number) => (el: HTMLDivElement | null): void => {
@@ -24,14 +25,14 @@ export default function About() {
     const el = sectionRef.current;
     if (!el) return;
 
-    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const reduce = window.matchMedia?.(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
 
     const ctx = gsap.context(() => {
-      // Estado inicial consistente
       gsap.set([titleRef.current, textRef.current], { opacity: 0, y: 24 });
       gsap.set(bulletsRef.current, { opacity: 0, y: 20 });
 
-      // Título
       gsap.to(titleRef.current, {
         opacity: 1,
         y: 0,
@@ -44,7 +45,6 @@ export default function About() {
         },
       });
 
-      // Párrafo
       gsap.to(textRef.current, {
         opacity: 1,
         y: 0,
@@ -58,7 +58,6 @@ export default function About() {
         },
       });
 
-      // Bullets
       gsap.to(bulletsRef.current, {
         opacity: 1,
         y: 0,
@@ -72,7 +71,6 @@ export default function About() {
         },
       });
 
-      // KPIs: contador animado
       if (!reduce) {
         kpiRefs.current.forEach((node) => {
           const target = Number(node.dataset.target || "0");
@@ -80,6 +78,7 @@ export default function About() {
           if (!numEl) return;
 
           const obj = { val: 0 };
+
           gsap.to(obj, {
             val: target,
             duration: 1.2,
@@ -92,13 +91,9 @@ export default function About() {
             onUpdate: () => {
               numEl.textContent = Math.floor(obj.val).toString();
             },
-            onComplete: () => {
-              // Si quieres un + al final en algunos KPIs, puedes dejarlo en el markup fijo.
-            },
           });
         });
       } else {
-        // Sin animación: setea valores finales
         kpiRefs.current.forEach((node) => {
           const target = node.dataset.target || "0";
           const numEl = node.querySelector<HTMLElement>("[data-num]");
@@ -114,131 +109,162 @@ export default function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="relative overflow-hidden py-20 md:py-28 border-t border-neutral-200/60 bg-white"
+      className="relative overflow-hidden border-t border-[#C6A66B]/15 bg-[#070707] py-20 text-white scroll-mt-24 md:py-28"
     >
-      {/* Blob/halo sutil de fondo */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-      >
-        <div className="absolute left-1/2 top-6 -translate-x-1/2 h-64 w-64 md:h-96 md:w-96 rounded-full bg-[#4f39f6]/10 blur-3xl" />
-      </div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(198,166,107,0.16),transparent_42%)]" />
+      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black to-transparent" />
 
-      <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-12 gap-10 md:gap-12 items-center">
-        {/* Columna texto */}
+      <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-10 px-4 md:grid-cols-12 md:gap-12">
         <div className="md:col-span-7">
+          <div className="mb-5 w-fit rounded-full border border-[#C6A66B]/30 bg-white/[0.04] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-[#C6A66B]">
+            Sobre franklin.builds
+          </div>
+
           <h2
             ref={titleRef}
-            className="text-3xl md:text-5xl font-semibold tracking-tight font-alfa mb-5"
+            className="mb-5 font-alfa text-3xl font-semibold tracking-tight md:text-5xl"
           >
-            Sobre mí
+            Desarrollo soluciones digitales para negocios que quieren competir mejor
           </h2>
 
           <p
             ref={textRef}
-            className="text-neutral-700 text-base md:text-lg leading-relaxed max-w-2xl"
+            className="max-w-2xl text-base leading-relaxed text-neutral-400 md:text-lg"
           >
-            Soy Franklin, fundador de <span className="font-semibold">franklin.builds</span>. 
-            Creo sitios y marcas minimalistas que **venden**: rápidos, claros y orientados a WhatsApp.
-            Combino diseño, desarrollo y estrategia para que tu web pase de “bonita” a “que convierte”.
+            Soy Franklin, fundador de{" "}
+            <span className="font-semibold text-white">franklin.builds</span>.
+            Ayudo a negocios locales y marcas en crecimiento a construir una
+            presencia digital más seria, clara y preparada para vender.
           </p>
 
-          {/* Bullets diferenciales */}
-          <div
-            ref={bulletsRef}
-            className="mt-6 grid gap-3"
-          >
+          <div ref={bulletsRef} className="mt-7 grid gap-4">
             {[
-              "Performance real (90+ Lighthouse) y SEO base desde el día uno.",
-              "Copy y estructura pensados para convertir, no solo para “verse bien”.",
-              "Integraciones prácticas: WhatsApp, analítica y lo necesario para vender.",
+              "Diseño interfaces profesionales que generan confianza desde el primer contacto.",
+              "Construyo webs, catálogos y sistemas pensados para convertir visitas en consultas.",
+              "Integro herramientas prácticas como WhatsApp, analítica, SEO base y gestión de contenido.",
             ].map((t, i) => (
               <div key={i} className="flex items-start gap-3">
-                <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
+                <span className="mt-1 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[#C6A66B]/30 bg-[#C6A66B]/10 text-[#C6A66B]">
                   <FiCheck aria-hidden />
                 </span>
-                <p className="text-neutral-700">{t}</p>
+                <p className="text-neutral-300">{t}</p>
               </div>
             ))}
           </div>
 
-          {/* KPIs */}
-          <div className="mt-8 grid grid-cols-3 gap-4 max-w-md">
+          <div className="mt-8 grid max-w-md grid-cols-3 gap-4">
             <div
               ref={setKpiRef(0)}
               data-target="12"
-              className="text-center rounded-xl border border-neutral-200 bg-white p-4"
+              className="rounded-2xl border border-[#C6A66B]/15 bg-white/[0.04] p-4 text-center"
             >
-              <div className="text-2xl font-semibold">
+              <div className="text-2xl font-semibold text-white">
                 <span data-num>0</span>+
               </div>
-              <div className="text-xs text-neutral-600">proyectos</div>
+              <div className="mt-1 text-xs text-neutral-400">proyectos</div>
             </div>
+
             <div
               ref={setKpiRef(1)}
               data-target="90"
-              className="text-center rounded-xl border border-neutral-200 bg-white p-4"
+              className="rounded-2xl border border-[#C6A66B]/15 bg-white/[0.04] p-4 text-center"
             >
-              <div className="text-2xl font-semibold">
+              <div className="text-2xl font-semibold text-white">
                 <span data-num>0</span>+
               </div>
-              <div className="text-xs text-neutral-600">Lighthouse</div>
+              <div className="mt-1 text-xs text-neutral-400">performance</div>
             </div>
+
             <div
               ref={setKpiRef(2)}
               data-target="3"
-              className="text-center rounded-xl border border-neutral-200 bg-white p-4"
+              className="rounded-2xl border border-[#C6A66B]/15 bg-white/[0.04] p-4 text-center"
             >
-              <div className="text-2xl font-semibold">
+              <div className="text-2xl font-semibold text-white">
                 <span data-num>0</span>d
               </div>
-              <div className="text-xs text-neutral-600">MVP promedio</div>
+              <div className="mt-1 text-xs text-neutral-400">MVP inicial</div>
             </div>
           </div>
 
-          {/* CTA secundaria */}
-          <div className="mt-7">
+          <div className="mt-8">
             <NavLink
               to="https://wa.me/53552929141"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl border border-[#25D366] px-5 py-2.5 text-sm font-medium text-[#25D366] hover:bg-[#25D366] hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 rounded-full border border-[#C6A66B]/50 bg-[#C6A66B] px-6 py-3 text-sm font-semibold text-black shadow-[0_14px_35px_rgba(198,166,107,0.22)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#D9BB7A]"
             >
               <FaWhatsapp className="text-base" />
-              Cuéntame tu idea por WhatsApp
+              Hablemos de tu negocio
             </NavLink>
           </div>
         </div>
 
-        {/* Columna “visual stack” / credentials */}
         <div className="md:col-span-5">
-          <div className="rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur p-6 shadow-sm">
-            <div className="mb-4 text-sm font-medium text-neutral-700">
-              Stack con el que construyo
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="inline-flex items-center gap-2 rounded-full border border-neutral-200 px-3 py-1.5 text-sm">
-                <SiReact className="text-sky-600" aria-hidden />
-                React
-              </span>
-              <span className="inline-flex items-center gap-2 rounded-full border border-neutral-200 px-3 py-1.5 text-sm">
-                <SiNextdotjs className="text-neutral-900" aria-hidden />
-                Next.js
-              </span>
-              <span className="inline-flex items-center gap-2 rounded-full border border-neutral-200 px-3 py-1.5 text-sm">
-                <SiTailwindcss className="text-cyan-500" aria-hidden />
-                Tailwind
-              </span>
-            </div>
+          <div className="relative overflow-hidden rounded-3xl border border-[#C6A66B]/20 bg-white/[0.04] p-6 shadow-[0_24px_80px_rgba(198,166,107,0.10)] backdrop-blur-md">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(198,166,107,0.16),transparent_55%)]" />
 
-            <div className="mt-6 text-sm text-neutral-600 leading-relaxed">
-              También trabajo con integraciones prácticas (WhatsApp,Supabase),
-              y optimizaciones reales de rendimiento (imágenes, lazy-load, code-split).
-            </div>
+            <div className="relative z-10">
+              <p className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-[#C6A66B]">
+                Stack de desarrollo
+              </p>
 
-            {/* Nota de enfoque */}
-            <div className="mt-4 rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm text-neutral-700">
-              Enfoque: claridad, velocidad y conversión.
+              <h3 className="text-2xl font-semibold text-white">
+                Tecnología moderna para soluciones rápidas y escalables
+              </h3>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                <span className="inline-flex items-center gap-2 rounded-full border border-[#C6A66B]/20 bg-[#C6A66B]/10 px-3 py-1.5 text-sm text-[#C6A66B]">
+                  <SiReact aria-hidden />
+                  React
+                </span>
+
+                <span className="inline-flex items-center gap-2 rounded-full border border-[#C6A66B]/20 bg-[#C6A66B]/10 px-3 py-1.5 text-sm text-[#C6A66B]">
+                  <SiNextdotjs aria-hidden />
+                  Next.js
+                </span>
+
+                <span className="inline-flex items-center gap-2 rounded-full border border-[#C6A66B]/20 bg-[#C6A66B]/10 px-3 py-1.5 text-sm text-[#C6A66B]">
+                  <SiTailwindcss aria-hidden />
+                  Tailwind
+                </span>
+              </div>
+
+              <p className="mt-6 text-sm leading-7 text-neutral-400">
+                También trabajo con integraciones de WhatsApp, Supabase,
+                analítica, optimización de imágenes, carga rápida y estructuras
+                preparadas para crecer.
+              </p>
+
+              <div className="mt-6 rounded-2xl border border-[#C6A66B]/15 bg-black/30 p-4">
+                <p className="text-sm font-semibold text-white">
+                  Enfoque principal
+                </p>
+                <p className="mt-1 text-sm leading-6 text-neutral-400">
+                  Claridad comercial, velocidad, confianza visual y conversión.
+                </p>
+              </div>
+
+              <div className="mt-5 grid grid-cols-2 gap-3">
+                <div className="rounded-2xl border border-[#C6A66B]/15 bg-white/3 p-4">
+                  <p className="text-sm font-semibold text-white">
+                    Para clientes
+                  </p>
+                  <p className="mt-1 text-xs leading-5 text-neutral-400">
+                    Webs, catálogos, reservas y sistemas.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-[#C6A66B]/15 bg-white/3 p-4">
+                  <p className="text-sm font-semibold text-white">
+                    Para negocios
+                  </p>
+                  <p className="mt-1 text-xs leading-5 text-neutral-400">
+                    Presencia seria, ventas y organización.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

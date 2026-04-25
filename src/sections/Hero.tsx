@@ -21,7 +21,6 @@ const Hero = () => {
         defaults: { ease: "power3.out", duration: 1 },
       });
 
-      // Animación inicial
       tl.fromTo(
         titleRef.current,
         { y: 60, opacity: 0, filter: "blur(6px)" },
@@ -40,7 +39,6 @@ const Hero = () => {
           "-=0.4"
         );
 
-      // Título con leve flotación
       gsap.to(titleRef.current, {
         y: -2,
         duration: 2.4,
@@ -49,7 +47,6 @@ const Hero = () => {
         repeat: -1,
       });
 
-      // Parallax en fondo
       if (bgRef.current) {
         gsap.to(bgRef.current, {
           scale: 1.06,
@@ -63,7 +60,6 @@ const Hero = () => {
         });
       }
 
-      // Chevron animado
       gsap.to(chevronRef.current, {
         y: 6,
         duration: 1.2,
@@ -76,26 +72,41 @@ const Hero = () => {
     return () => ctx.revert();
   }, []);
 
-  // Pulso sutil del botón de WhatsApp
   useEffect(() => {
     const el = whatsappRef.current;
     if (!el) return;
 
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
     if (prefersReduced) return;
 
-    const tl = gsap.timeline({ repeat: -1, repeatDelay: 2, defaults: { ease: "power2.out" } });
+    const tl = gsap.timeline({
+      repeat: -1,
+      repeatDelay: 2,
+      defaults: { ease: "power2.out" },
+    });
+
     tl.to(el, { scale: 1.04, duration: 0.22 })
       .to(el, { scale: 1, duration: 0.28 })
       .fromTo(
         el,
-        { boxShadow: "0 0 0 0 rgba(37,211,102,0)" },
-        { boxShadow: "0 0 24px 2px rgba(37,211,102,0.35)", duration: 0.25 },
+        { boxShadow: "0 0 0 0 rgba(198,166,107,0)" },
+        {
+          boxShadow: "0 0 28px 2px rgba(198,166,107,0.32)",
+          duration: 0.25,
+        },
         0
       )
-      .to(el, { boxShadow: "0 0 0 0 rgba(37,211,102,0)", duration: 0.35 }, "<+0.05");
+      .to(
+        el,
+        { boxShadow: "0 0 0 0 rgba(198,166,107,0)", duration: 0.35 },
+        "<+0.05"
+      );
 
     pulseTl.current = tl;
+
     return () => {
       tl.kill();
       pulseTl.current = null;
@@ -112,41 +123,45 @@ const Hero = () => {
     <section
       ref={containerRef}
       id="hero"
-      className="relative flex flex-col justify-center items-center text-center min-h-[92vh] pt-10 px-6 overflow-hidden text-white"
+      className="relative flex min-h-[92vh] flex-col items-center justify-center overflow-hidden px-6 pt-10 text-center text-white"
     >
-      {/* Imagen de fondo */}
       <img
         ref={bgRef}
         src="/images/fondo_hero.jpg"
         alt="Fondo hero section"
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover"
         loading="eager"
       />
-      <div className="absolute inset-0 bg-black/35" />
 
-      {/* Contenido */}
-      <div className="relative z-10 drop-shadow-[0_2px_6px_rgba(0,0,0,0.5)] max-w-3xl">
-        <div className="text-xs md:text-sm uppercase tracking-[0.25em] mb-5 font-rammetto text-white">
-          Diseño & Estrategia Digital
+      <div className="absolute inset-0 bg-black/70" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(198,166,107,0.18),transparent_42%)]" />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-[#070707] to-transparent" />
+
+      <div className="relative z-10 max-w-4xl">
+        <div className="mb-5 inline-flex rounded-full border border-[#C6A66B]/30 bg-black/30 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-[#C6A66B] backdrop-blur-md md:text-xs">
+          Soluciones digitales para negocios
         </div>
 
         <h1
           ref={titleRef}
-          className="font-righteous text-[2.4rem] md:text-[4.2rem] leading-[1.08] font-normal tracking-tight mb-4 text-white"
+          className="font-righteous text-[2.45rem] font-normal leading-[1.05] tracking-tight text-white md:text-[4.6rem]"
         >
-          Diseño + Web + Estrategia que convierte en clientes
+          Presencia digital premium para negocios que quieren vender mejor
         </h1>
 
         <p
           ref={subtitleRef}
-          className="font-rammetto max-w-2xl mx-auto text-white/95 text-base md:text-lg leading-relaxed mb-9"
+          className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-neutral-300 md:text-lg"
         >
-          Transformo negocios locales en marcas digitales que venden. Minimalismo, performance y una experiencia que inspira confianza
+          Desarrollo webs, catálogos digitales y sistemas a medida para que tu
+          negocio se vea más profesional, genere confianza y convierta visitantes
+          en clientes.
         </p>
 
-        {/* CTAs */}
-        <div ref={ctasRef} className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          {/* WhatsApp con pulso */}
+        <div
+          ref={ctasRef}
+          className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
+        >
           <NavLink
             ref={whatsappRef}
             to="https://wa.me/53552929141"
@@ -155,28 +170,49 @@ const Hero = () => {
             aria-label="Abrir chat de WhatsApp"
             onMouseEnter={() => pulseTl.current?.pause()}
             onMouseLeave={() => pulseTl.current?.resume()}
-            className="inline-flex items-center justify-center gap-2 border border-[#25D366] px-6 py-3 rounded-xl text-sm font-medium font-rammetto text-[#25D366] hover:bg-[#25D366] hover:text-white transition-colors will-change-transform"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-[#C6A66B]/50 bg-[#C6A66B] px-6 py-3 text-sm font-semibold text-black shadow-[0_16px_40px_rgba(198,166,107,0.24)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#D9BB7A] will-change-transform"
           >
-            <FaWhatsapp className="text-lg text-[#25D366]" />
-            Hablemos por WhatsApp
+            <FaWhatsapp className="text-lg text-black" />
+            Hablemos de tu negocio
           </NavLink>
 
-          {/* Ver proyectos */}
           <NavLink
             to="/proyectos"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-xl text-sm font-medium font-rammetto bg-white/10 border border-white/30 hover:bg-white hover:text-black transition-colors"
+            className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/6 px-6 py-3 text-sm font-semibold text-white backdrop-blur-md transition-all duration-200 hover:-translate-y-0.5 hover:border-[#C6A66B]/50 hover:text-[#C6A66B]"
           >
-            Ver proyectos
+            Ver casos reales
           </NavLink>
+        </div>
+
+        <div className="mx-auto mt-10 grid max-w-3xl gap-3 text-left sm:grid-cols-3">
+          <div className="rounded-2xl border border-[#C6A66B]/15 bg-white/4 p-4 backdrop-blur-md">
+            <p className="text-sm font-semibold text-white">Web profesional</p>
+            <p className="mt-1 text-xs leading-5 text-neutral-400">
+              Una imagen seria para que tus clientes confíen antes de escribirte.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-[#C6A66B]/15 bg-white/4 p-4 backdrop-blur-md">
+            <p className="text-sm font-semibold text-white">Ventas por WhatsApp</p>
+            <p className="mt-1 text-xs leading-5 text-neutral-400">
+              Catálogos y flujos pensados para convertir consultas en pedidos.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-[#C6A66B]/15 bg-white/4 p-4 backdrop-blur-md">
+            <p className="text-sm font-semibold text-white">Sistemas internos</p>
+            <p className="mt-1 text-xs leading-5 text-neutral-400">
+              Herramientas para organizar reservas, productos, clientes o procesos.
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* Chevron scroll */}
       <button
         ref={chevronRef}
         onClick={goToServices}
         aria-label="Ir a la sección de servicios"
-        className="relative z-10 mt-10 inline-flex items-center justify-center w-9 h-9 rounded-full border border-white/50 hover:bg-white hover:text-black transition-colors"
+        className="relative z-10 mt-10 inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#C6A66B]/40 text-[#C6A66B] transition-colors hover:bg-[#C6A66B] hover:text-black"
       >
         <span className="text-lg leading-none">⌄</span>
       </button>
